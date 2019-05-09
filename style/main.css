@@ -1,13 +1,16 @@
 #words-output{
     outline: 0;
-    height: 100px;
-    width: 80%;
-    resize: none
+    width:80%;
+    resize: none;
 }
 
 
 #words-input{
     text-align: center;
-    top: 100px;
     width: 80%;
+}
+
+#words-output> span {
+    display: inline-block;
+    margin-left: 0.2em;
 }
