@@ -19,3 +19,11 @@
     display: block;
     border: 2px solid black;
 }
+
+.correct{
+    background-color: rgb(78, 253, 78);
+}
+
+.incorrect {
+    background-color: rgb(245, 81, 81);
+}

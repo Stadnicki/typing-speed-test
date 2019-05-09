@@ -7,6 +7,7 @@ var timerClock = document.getElementById('timer')
 var currentWord = ""
 var currentlyEntered = ""
 var isGameStarted = false;
+var endOfGame = false;
 var counter = 0;
 
 const popularWords = [
@@ -36,8 +37,12 @@ function checkTimer() {
   if(!isGameStarted){
     isGameStarted = true;
     var seconds = 60;
-    setInterval(function () {
+    var timerInterval = setInterval(() => {
       timerClock.textContent = seconds;
+      if(seconds === 0){
+        clearInterval(timerInterval);
+        endOfGame = true;
+      }
       seconds--;
     }, 1000);
   }
@@ -69,24 +74,28 @@ function loadWords(wordsArray){
 
 function handleKeyPressed(e){ 
   keynum = e.keyCode;
+  if(endOfGame){
 
-  checkTimer();
-
-  if(currentlyEntered === "" && keynum === 32){
-    console.log("empty")
-    input.value = "";
-  }
-  else if (keynum === 32){
-    input.value = "";
-    console.log("checking word")
-    checkWord(currentlyEntered);
-    currentlyEntered = ""
-  }
-  else if(keynum === 8){
-    currentlyEntered = currentlyEntered.substring(0, currentlyEntered.length-1);
   }
   else {
-    currentlyEntered += String.fromCharCode(keynum);
+    checkTimer();
+
+    if(currentlyEntered === "" && keynum === 32){
+      console.log("empty")
+      input.value = "";
+    }
+    else if (keynum === 32){
+      input.value = "";
+      console.log("checking word")
+      checkWord(currentlyEntered);
+      currentlyEntered = ""
+    }
+    else if(keynum === 8){
+      currentlyEntered = currentlyEntered.substring(0, currentlyEntered.length-1);
+    }
+    else {
+      currentlyEntered += String.fromCharCode(keynum);
+    }
   }
 }
 
@@ -95,6 +104,10 @@ function checkWord(enteredWord){
   if(enteredWord.toLowerCase() === currentWord.toLowerCase()){
     console.log("match")
     counter++;
+    document.querySelector(".current-word").classList.add("correct")
+  }
+  else {
+    document.querySelector(".current-word").classList.add("incorrect")
   }
   let current = document.querySelector(".current-word");
   current.nextSibling.classList.add("current-word")
