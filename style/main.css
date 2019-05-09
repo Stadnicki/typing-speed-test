@@ -1,0 +1,13 @@
+#words-output{
+    outline: 0;
+    height: 100px;
+    width: 80%;
+    resize: none
+}
+
+
+#words-input{
+    text-align: center;
+    top: 100px;
+    width: 80%;
+}
