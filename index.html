@@ -9,7 +9,10 @@
     <body>
         <div class="root">
             <section id="words-output" > </section>
-            <input placeholder="Type here..." type="text" id="words-input" >
+            <input type="text" id="words-input" onkeyup="handleKeyPressed(event)">
+
+            <div>Time left: <span id="timer">60</span></div>
+            <div>Correct: <span id="correct-counter">0</span></div>
         </div>
         <script src="/js/Hello.js"></script>
     </body>
