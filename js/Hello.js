@@ -8,7 +8,8 @@ var currentWord = ""
 var currentlyEntered = ""
 var isGameStarted = false;
 var endOfGame = false;
-var counter = 0;
+var correctCounter = 0;
+var allCounter = 0;
 
 const popularWords = [
     'the',
@@ -75,16 +76,16 @@ function loadWords(wordsArray){
 function handleKeyPressed(e){ 
   keynum = e.keyCode;
   if(endOfGame){
-
+    input.value = "";
   }
   else {
     checkTimer();
-
-    if(currentlyEntered === "" && keynum === 32){
+    console.log("key: " + keynum)
+    if(currentlyEntered === "" && ((keynum === 32) || keynum === 13)){
       console.log("empty")
       input.value = "";
     }
-    else if (keynum === 32){
+    else if (keynum === 32 || keynum === 13){
       input.value = "";
       console.log("checking word")
       checkWord(currentlyEntered);
@@ -92,18 +93,40 @@ function handleKeyPressed(e){
     }
     else if(keynum === 8){
       currentlyEntered = currentlyEntered.substring(0, currentlyEntered.length-1);
+      checkCurrentState();
     }
     else {
       currentlyEntered += String.fromCharCode(keynum);
+      checkCurrentState();
     }
+  }
+}
+
+function checkCurrentState(){
+  console.log(currentWord.toLowerCase() + "-" + currentlyEntered.toLowerCase())
+  var currentElement = document.querySelector(".current-word");
+  if(currentlyEntered != ""){
+    if(currentWord.toLowerCase().startsWith(currentlyEntered.toLowerCase())){
+      currentElement.classList.add("correct");
+      currentElement.classList.remove("incorrect")
+    }
+    else{
+      currentElement.classList.add("incorrect");
+      currentElement.classList.remove("correct")
+    }
+  }
+  else{
+    currentElement.classList.remove("incorrect")
+    currentElement.classList.remove("correct")
   }
 }
 
 function checkWord(enteredWord){
   console.log("words:(" + enteredWord + "|" + currentWord+")")
+  allCounter++;
   if(enteredWord.toLowerCase() === currentWord.toLowerCase()){
     console.log("match")
-    counter++;
+    correctCounter++;
     document.querySelector(".current-word").classList.add("correct")
   }
   else {
@@ -115,6 +138,20 @@ function checkWord(enteredWord){
   current = document.querySelector(".current-word");
   currentWord = current.textContent;
   console.log("new current word: " + currentWord)
-  document.getElementById('correct-counter').innerHTML =counter
-  
+  setCorrectCounter(correctCounter);
+  setAllCounter(allCounter);
+  setCorrectPerCent();
+}
+
+function setCorrectCounter(x){
+  document.getElementById('correct-counter').innerHTML = x
+}
+
+function setAllCounter(x){
+  document.getElementById('all-counter').innerHTML = x
+}
+
+function setCorrectPerCent(){
+  var percent = Math.floor((correctCounter/allCounter)*100);
+  document.getElementById('correct-percent').innerHTML = percent+"%"
 }

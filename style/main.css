@@ -8,16 +8,19 @@
 #words-input{
     text-align: center;
     width: 80%;
+    font-size: 24px;
 }
 
 #words-output> span {
     display: inline-block;
-    margin-right: 5px;
+    margin: 2px;
+    padding: 2px;
+    font-size: 24px;
 }
 
 .current-word {
     display: block;
-    border: 2px solid black;
+    border: solid black 1px;
 }
 
 .correct{
