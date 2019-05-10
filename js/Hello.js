@@ -11,26 +11,11 @@ var endOfGame = false;
 var correctCounter = 0;
 var allCounter = 0;
 
-const popularWords = [
-    'the',
-    'be',
-    'to',
-    'of',
-    'and',
-    'in',
-    'that',
-    'have',
-    'it',
-    'for',
-    'not',
-    'on',
-    'with',
-    'he',
-    'as',
-    'you',
-    'do',
-    'at'
-  ];
+const popularWords = ['the', 'of', 'and','to', 'in','is','you','that','it','he','was','for','on','are','as','with','his','they',
+'at','be','this','have','from','or','one','had','by','word','but','not','what','all','were','we','when','your','car', 'said',
+'there','use','each','which','she','do', 'how','their','will','other','about','many','then','these','so',
+'some','her','would','make','like','him','into','time','has','look','two','more','write','go','see','number','way','could','people',
+'my','than','first','water','been','call','who','now','find','long','down','day','did','get','come','made','may','part'];
 
 var gameWords = []
 
@@ -132,26 +117,37 @@ function checkWord(enteredWord){
   else {
     document.querySelector(".current-word").classList.add("incorrect")
   }
+  let previous = document.querySelector(".current-word");
+  previous.classList.add("ready")
+  previous.nextSibling.classList.add("current-word")
+  previous.classList.remove("current-word")
   let current = document.querySelector(".current-word");
-  current.nextSibling.classList.add("current-word")
-  current.classList.remove("current-word")
-  current = document.querySelector(".current-word");
   currentWord = current.textContent;
   console.log("new current word: " + currentWord)
   setCorrectCounter(correctCounter);
   setAllCounter(allCounter);
   setCorrectPerCent();
+  console.log(previous.offsetTop + "-"+current.offsetTop);
+  var allPreviousWords = document.getElementsByClassName("ready");
+  if(current.offsetTop - previous.offsetTop > 10){
+    console.log("i will remove: " + allPreviousWords.length + " elements");
+    var numberOfReadyElements = allPreviousWords.length;
+    for(var i = 0; i < numberOfReadyElements; i++){
+      console.log("i: " + i)
+      output.removeChild(output.firstChild);
+    }
+  }
 }
 
 function setCorrectCounter(x){
-  document.getElementById('correct-counter').innerHTML = x
+  document.getElementById('correct-counter').innerHTML = x;
 }
 
 function setAllCounter(x){
-  document.getElementById('all-counter').innerHTML = x
+  document.getElementById('all-counter').innerHTML = x;
 }
 
 function setCorrectPerCent(){
   var percent = Math.floor((correctCounter/allCounter)*100);
-  document.getElementById('correct-percent').innerHTML = percent+"%"
+  document.getElementById('correct-percent').innerHTML = percent+"%";
 }

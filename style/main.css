@@ -1,14 +1,34 @@
 #words-output{
     outline: 0;
-    width:80%;
+    width:90%;
+    position: relative; left: 50%;
+    transform: translateX(-50%); 
     resize: none;
+    padding: 0.5em;
+    font-size: 1.5em;
+    height: 4.5em;
+    line-height: 2em;
+    border: solid 0.2em black;
+    border-radius:  0.25em;
+    overflow: hidden;
 }
 
+#statistics{
+    text-align: center;
+    border: solid 0.25em black;
+    width: 50%;
+    position: relative; left: 50%;
+    transform: translateX(-50%); 
+}
 
 #words-input{
     text-align: center;
-    width: 80%;
+    width: 50%;
     font-size: 24px;
+    position: relative; left: 50%;
+    transform: translateX(-50%); 
+    border: solid 0.2em black;
+    border-radius:  0.25em;
 }
 
 #words-output> span {
