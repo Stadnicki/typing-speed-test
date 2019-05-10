@@ -151,3 +151,7 @@ function setCorrectPerCent(){
   var percent = Math.floor((correctCounter/allCounter)*100);
   document.getElementById('correct-percent').innerHTML = percent+"%";
 }
+
+function restartGame(){
+  location.reload();  
+}
